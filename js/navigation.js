@@ -31,7 +31,8 @@
         
         if (!toggle || !nav) return;
 
-        toggle.addEventListener('click', function() {
+        toggle.addEventListener('click', function(e) {
+            e.stopPropagation();
             const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
             
             // Toggle aria-expanded attribute
@@ -90,49 +91,10 @@
             
             if (!link || !menu) return;
 
-            // Handle click on parent link
-            link.addEventListener('click', function(e) {
-                // On mobile or when dropdown is already open, allow click to toggle
-                const isExpanded = link.getAttribute('aria-expanded') === 'true';
-                
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    toggleDropdown(link, menu, !isExpanded);
-                }
-            });
-
-            // Automatically expand dropdown when parent link receives focus
-            // This makes dropdown items accessible via Tab key
-            link.addEventListener('focus', function() {
-                toggleDropdown(link, menu, true);
-            });
-
-            // Keep dropdown open when focusing items inside it
-            const menuItems = menu.querySelectorAll('a');
-            menuItems.forEach(item => {
-                item.addEventListener('focus', function() {
-                    toggleDropdown(link, menu, true);
-                });
-            });
-
-            // Close dropdown when focus leaves the entire dropdown container
-            dropdown.addEventListener('focusout', function(e) {
-                // Check if new focus is outside this dropdown
-                setTimeout(() => {
-                    if (!dropdown.contains(document.activeElement)) {
-                        toggleDropdown(link, menu, false);
-                    }
-                }, 10);
-            });
-
-            // Handle keyboard navigation
+            // Only handle arrow key navigation
             link.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    // Allow Enter/Space to navigate to the parent link's href
-                    // Don't prevent default - let the link work normally
-                } else if (e.key === 'ArrowDown') {
+                if (e.key === 'ArrowDown') {
                     e.preventDefault();
-                    toggleDropdown(link, menu, true);
                     const firstItem = menu.querySelector('a');
                     if (firstItem) firstItem.focus();
                 }
@@ -156,28 +118,11 @@
                         }
                     } else if (e.key === 'Escape') {
                         e.preventDefault();
-                        toggleDropdown(link, menu, false);
                         link.focus();
                     }
                 });
             });
-
-            // Close on outside click
-            document.addEventListener('click', function(e) {
-                if (!dropdown.contains(e.target)) {
-                    toggleDropdown(link, menu, false);
-                }
-            });
         });
-    }
-
-    function toggleDropdown(link, menu, show) {
-        link.setAttribute('aria-expanded', show);
-        if (show) {
-            menu.style.display = 'block';
-        } else {
-            menu.style.display = 'none';
-        }
     }
 
     /**
