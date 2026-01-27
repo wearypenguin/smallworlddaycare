@@ -16,8 +16,12 @@
     /* Color System - WCAG AA Compliant */
     --color-primary: #2563eb;        /* Blue - 4.5:1 contrast on white */
     --color-primary-dark: #1e40af;   /* Darker blue for hover states */
-    --color-secondary: #059669;      /* Green - accessible contrast */
+    --color-secondary: #047C56;      /* Green - accessible contrast */
     --color-accent: #f59e0b;         /* Amber for highlights */
+    
+    /* RGB values for opacity support */
+    --color-primary-rgb: 37, 99, 235;
+    --color-secondary-rgb: 5, 150, 105;
     
     --color-text: #1f2937;           /* Dark gray for body text */
     --color-text-light: #4b5563;     /* Lighter gray for secondary text */
@@ -25,7 +29,7 @@
     --color-background-alt: #f9fafb;
     
     --color-border: #e5e7eb;
-    --color-success: #059669;
+    --color-success: #047C56;
     
     /* Typography */
     --font-family: Lato, HelveticaNeue, "Helvetica Neue", Helvetica-Neue, Helvetica, Arial, sans-serif;
@@ -84,6 +88,13 @@ a:focus {
 .main-nav a:hover,
 .main-nav a:focus {
     text-decoration: none;
+}
+
+h2 {
+    margin-bottom: var(--spacing-sm);
+}
+h3 {
+    margin-bottom: var(--spacing-xs);
 }
 
 /* ============================================
@@ -323,7 +334,7 @@ a:focus {
 .hero-content {
     max-width: 800px;
     margin: 0 auto;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.92) 0%, rgba(118, 75, 162, 0.92) 100%);
+    background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.95) 0%, rgba(var(--color-secondary-rgb), 0.95) 100%);
     padding: var(--spacing-xl) var(--spacing-lg);
     border-radius: var(--border-radius);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -420,14 +431,14 @@ a:focus {
    SECTIONS
    ============================================ */
 section {
-    padding: var(--spacing-2xl) 0;
+    padding: var(--spacing-xl) 0;
 }
 
 .section-title {
     font-size: 2rem;
     font-weight: 700;
     text-align: center;
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
     color: var(--color-text);
 }
 
@@ -511,7 +522,7 @@ section {
 
 /* CTA Section */
 .cta-section {
-    background: var(--color-primary);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     color: white;
     text-align: center;
 }
@@ -807,12 +818,83 @@ section {
 }
 
 /* ============================================
+   BACK TO TOP BUTTON
+   ============================================ */
+
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--color-secondary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover,
+.back-to-top:focus {
+    background: var(--color-secondary);
+    outline: 3px solid var(--color-secondary);
+    outline-offset: 2px;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top:active {
+    transform: translateY(-1px);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .back-to-top {
+        transition: opacity 0.1s ease;
+        transform: none;
+    }
+    
+    .back-to-top:hover,
+    .back-to-top:focus {
+        transform: none;
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.25rem;
+    }
+}
+
+/* ============================================
    PAGE-SPECIFIC STYLES
    ============================================ */
 
 /* Page Hero */
 .page-hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    /*background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);*/
     color: white;
     padding: var(--spacing-xl) 0;
     text-align: center;
@@ -834,7 +916,7 @@ section {
 .page-hero.hero-with-image .hero-content {
     max-width: 800px;
     margin: 0 auto;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.92) 0%, rgba(118, 75, 162, 0.92) 100%);
+    background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.95) 0%, rgba(var(--color-secondary-rgb), 0.95) 100%);
     padding: var(--spacing-xl) var(--spacing-lg);
     border-radius: var(--border-radius);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -898,10 +980,6 @@ section {
 }
 
 /* About Page */
-.about-intro {
-    padding: var(--spacing-2xl) 0;
-}
-
 .hours-section {
     background: var(--color-background-alt);
 }
@@ -1057,10 +1135,6 @@ section {
 }
 
 /* Programs Page */
-.programs-intro {
-    padding: var(--spacing-2xl) 0;
-}
-
 .program-card {
     background: var(--color-background);
     border-radius: var(--border-radius);
@@ -1122,8 +1196,9 @@ section {
     padding: var(--spacing-2xl) 0;
 }
 
-.contact-card {
+.card.contact-card {
     text-align: center;
+    padding: var(--spacing-md);
 }
 
 .contact-card a {
@@ -1137,8 +1212,8 @@ section {
 }
 
 .contact-icon {
-    font-size: 2.5rem;
-    margin-bottom: var(--spacing-md);
+    font-size: 2rem;
+    margin-bottom: var(--spacing-xs);
 }
 
 .contact-card h3 {
@@ -1171,11 +1246,6 @@ section {
     margin-bottom: var(--spacing-xs);
 }
 
-/* Resources Page */
-.resources-intro {
-    padding: var(--spacing-2xl) 0;
-}
-
 /* Classrooms Landing Page */
 .form-card h3 {
     font-size: 1.25rem;
@@ -1189,10 +1259,6 @@ section {
 }
 
 /* Classrooms Landing Page */
-.classrooms-intro {
-    padding: var(--spacing-2xl) 0;
-}
-
 .classroom-cards-grid {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
@@ -1220,8 +1286,8 @@ section {
 }
 
 .classroom-link-card .classroom-icon {
-    font-size: 3rem;
-    margin-bottom: var(--spacing-md);
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-xs);
 }
 
 .classroom-link-card h3 {

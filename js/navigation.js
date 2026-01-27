@@ -20,6 +20,7 @@
         setupDropdownMenus();
         setupFocusManagement();
         setupSmoothScrolling();
+        setupBackToTop();
     }
 
     /**
@@ -209,6 +210,52 @@
         setTimeout(() => {
             document.body.removeChild(announcement);
         }, 1000);
+    }
+
+    /**
+     * Setup Back to Top button
+     * Shows button when user scrolls down, hides when at top
+     */
+    function setupBackToTop() {
+        const backToTopBtn = document.getElementById('back-to-top');
+        
+        if (!backToTopBtn) return;
+
+        // Show/hide button based on scroll position
+        function toggleBackToTop() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        }
+
+        // Check on scroll
+        window.addEventListener('scroll', toggleBackToTop);
+        
+        // Check on page load
+        toggleBackToTop();
+
+        // Scroll to top when clicked
+        backToTopBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            if (prefersReducedMotion) {
+                // Jump to top instantly for users who prefer reduced motion
+                window.scrollTo(0, 0);
+            } else {
+                // Smooth scroll to top
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // Remove focus from the button
+            backToTopBtn.blur();
+        });
     }
 
 })();
