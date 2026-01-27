@@ -46,7 +46,8 @@
     
     /* Layout */
     --container-max-width: 1200px;
-    --border-radius: 4px;
+    --border-radius: 12px;
+    --border-radius-nav: 5px;
 }
 
 html {
@@ -244,7 +245,7 @@ h3 {
     text-decoration: none;
     color: var(--color-text);
     font-weight: 500;
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius-nav);
 }
 
 .main-nav a:hover {
@@ -1373,10 +1374,35 @@ section {
     gap: var(--spacing-xl);
 }
 
+.two-column-layout .column {
+    padding: var(--spacing-lg);
+    background: #f9fafb;
+    border-radius: var(--border-radius);
+}
+
 .two-column-layout h3 {
     font-size: 1.25rem;
     color: var(--color-primary);
     margin-bottom: var(--spacing-md);
+}
+
+.three-column-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-xl);
+}
+
+.three-column-layout h3 {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.three-column-layout .column {
+    padding: var(--spacing-lg);
+    background: var(--color-background-alt);
+    border-radius: var(--border-radius);
 }
 
 .feature-list {
