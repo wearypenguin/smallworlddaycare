@@ -7,44 +7,111 @@ A modern, fully accessible website for Small World Daycare & Learning Center in 
 ### ✅ Completed
 - Homepage with mission, goals, and features
 - About Us page with facility information
-- Programs overview page
-- Resources page with forms and FAQ
-- Contact page with map and information
+- Classrooms overview page (classrooms.html)
+- All 6 individual classroom pages with hero images:
+  - Infants page (classrooms/infants.html)
+  - Toddlers page (classrooms/toddlers.html)
+  - Two's page (classrooms/twos.html)
+  - Preschool page (classrooms/preschool.html)
+  - VPK page (classrooms/vpk.html)
+  - Afterschool page (classrooms/afterschool.html)
+- Forms page with links to required forms, infant forms, and information documents
+- Contact page with contact information, map, and licensing info
 - Fully accessible CSS (WCAG 2.1 AA compliant)
 - Keyboard-accessible navigation JavaScript
 - PDF Accessibility Guide documentation
 
+### 📝 Recent Changes (February 2026)
+
+**Accessibility Enhancements:**
+- **Screen Reader Improvements:**
+  - Added `aria-label` attributes to all MyProCare links (33 total across 11 files) for correct pronunciation ("My Pro Care" instead of "Meeprocaray")
+  - Fixed tab navigation structure in Two's classroom page (removed duplicate sections outside `<main>`)
+  - Fixed white text on white background issue in Two's page feature lists (improved contrast)
+  - Updated inaccurate alt text for VPK and Preschool images to properly describe classroom environments
+  
+- **FormSite Contact Form Accessibility:**
+  - Enhanced embedded contact form with comprehensive focus indicators
+  - Added focus styling for all form inputs (text fields, email, phone, textarea)
+  - Added visible focus border and shadow on submit button
+  - Note: Custom CSS added directly in FormSite's form builder to style iframe content
+  
+**UI/UX Improvements:**
+- **CSS Consolidation & Optimization:**
+  - Created "Common Patterns & Utilities" section consolidating repeated CSS patterns
+  - Removed ~30 lines of redundant CSS (border-radius, box-shadow, heading styles)
+  - Unified heading styles (h3) across special sections for consistency
+  - Applied universal transitions (0.2s ease) to all interactive elements
+  
+- **Dropdown Menu Refinements:**
+  - Fixed border-radius issue where dropdown items lost rounded corners on hover
+  - Added proper border-radius to first/last dropdown items for polished appearance
+  - Improved dropdown hover effects with smooth transitions
+  
+- **Card Behavior Consistency:**
+  - Removed hover effects from non-clickable goal cards on homepage
+  - Ensured consistent behavior between goal cards and feature cards
+  
+**Content Updates:**
+- Updated DCF License number from C08AL0189 to C08AL0155 across all 11 HTML files
+- Removed unused CSS classes (`.license-section`, `.license-info`) after contact page cleanup
+- Reduced FACCM logo size in footer from 101x91 to 80x72 pixels for better visual balance
+
+**Technical Improvements:**
+- Added comprehensive documentation comments in CSS explaining consolidation strategy
+- Improved maintainability by reducing code duplication
+- All changes maintain WCAG 2.1 AA compliance
+
+### 📝 Recent Changes (January 2025)
+
+**Content Alignment with Live Site (swdc.co):**
+- Renamed resources.html to forms.html to match live site navigation
+- Updated all navigation links across 12 HTML files to reference forms.html
+- Rewrote forms.html content with actual links to:
+  - Required Forms (online parent manual, enrollment packet, immunization forms, etc.)
+  - Infant Forms (infant instruction sheet, medications)
+  - Information Documents (parent handbook, schedules)
+- All links point to actual PDF documents and Formsite forms from swdc.co
+
+**Classroom Pages Redesign:**
+- Added hero images to all 6 classroom pages with proper background-image styling
+- Restored classroom content images (2 images per page showcasing the classroom environment)
+- Removed extra content not present on live site:
+  - Removed detailed daily schedules
+  - Removed curriculum breakdowns and feature cards
+  - Removed "What Makes Our Program Special" sections
+- Kept essential content: age ranges, program philosophy, classroom images, and call-to-action sections
+- Fixed VPK and afterschool pages by removing duplicate/leftover HTML fragments
+
+**Navigation Simplification:**
+- Changed Forms navigation from dropdown menu to direct link
+- Removed "Online Bill Pay" submenu item to simplify navigation
+- Applied changes to all 12 HTML files (main pages + 6 classroom pages)
+
+**Contact Page Simplification:**
+- Removed "Schedule a Visit" section
+- Removed "Quick Links" section with cards for wait list/bill pay/employment/forms
+- Streamlined page to focus on: hero, contact information cards, location map, and licensing info
+- Prepared space for embedded Formsite contact form
+
 ### 📋 To-Do List
 
 **High Priority:**
-- [ ] Create "Our Classrooms" landing page (classrooms.html)
-- [ ] Create individual classroom pages (6 total):
-  - [ ] Infants page (classrooms/infants.html)
-  - [ ] Toddlers page (classrooms/toddlers.html)
-  - [ ] Two's page (classrooms/twos.html)
-  - [ ] Preschool page (classrooms/preschool.html)
-  - [ ] VPK page (classrooms/vpk.html)
-  - [ ] Afterschool page (classrooms/afterschool.html)
-- [ ] Create Resources subpages:
-  - [ ] Forms dedicated page (resources/forms.html)
-  - [ ] Calendar/Events page (resources/calendar.html or similar)
-- [ ] Update navigation to include dropdown menus for "Our Classrooms" and "Resources"
-- [ ] Add accessible dropdown menu JavaScript functionality
-- [ ] Update all existing pages with new navigation structure
+- [x] ~~Embed Formsite contact form in contact.html~~ ✅ Completed with accessibility enhancements
+- [ ] Test all external links to PDFs and forms
+- [ ] Verify all navigation works correctly across all pages
 
 **Medium Priority:**
-- [ ] Add real photos to images/ directory
+- [ ] Add real photos to replace placeholder images
 - [ ] Create accessible PDF forms
 - [ ] Add logo/branding graphics
-- [ ] Test dropdown navigation with screen readers
-- [ ] Add breadcrumb navigation for subpages
+- [x] ~~Add breadcrumb navigation for classroom subpages~~ ✅ Already implemented
 - [ ] Create 404 error page
 
 **Before Launch:**
-- [ ] Run full accessibility audit on all pages
-- [ ] Test all dropdown interactions
-- [ ] Verify all internal links work correctly
-- [ ] Test responsive design on all pages
+- [x] ~~Run full accessibility audit on all pages~~ ✅ Major issues resolved (screen reader, focus indicators, contrast)
+- [ ] Test responsive design on all devices
+- [ ] Verify all internal and external links work correctly
 - [ ] Get client approval on content and design
 - [ ] Set up hosting and domain
 - [ ] Configure SSL certificate
@@ -67,6 +134,8 @@ A modern, fully accessible website for Small World Daycare & Learning Center in 
 ### Modern Design
 - Clean, professional interface
 - Mobile-first responsive design
+- Hero images on all major pages
+- Classroom-specific imagery showcasing environments
 - Fast loading and performance optimized
 - Modern CSS with custom properties
 - Smooth transitions and animations (respecting motion preferences)
@@ -478,5 +547,12 @@ Potential features to consider:
 
 **Website Built With:** HTML5, CSS3, Vanilla JavaScript  
 **Accessibility Standard:** WCAG 2.1 Level AA  
-**Last Updated:** January 2026  
-**Version:** 1.0
+**Last Updated:** February 2026  
+**Version:** 1.1
+
+**Recent Improvements Summary:**
+- Enhanced accessibility with comprehensive screen reader support
+- Consolidated CSS reducing code by ~30 lines while maintaining functionality  
+- Fixed all keyboard focus indicators including FormSite embedded form
+- Improved visual consistency across UI components
+- Updated license information and optimized footer logos

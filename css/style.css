@@ -179,6 +179,54 @@ h3 {
 }
 
 /* ============================================
+   COMMON PATTERNS & UTILITIES
+   ============================================ 
+   
+   This section consolidates repeated patterns throughout the stylesheet
+   to reduce redundancy and improve maintainability:
+   
+   - Shared border-radius and box-shadow for cards and containers
+   - Consistent heading styles (h3) across special sections
+   - Universal transition timing for interactive elements
+   - Common padding and spacing patterns
+   
+   Elements using these shared styles:
+   - Cards: .card, .hours-card, .goal-card, .classroom-card
+   - Columns: .two-column-layout .column, .three-column-layout .column
+   - Interactive: buttons, links, dropdowns
+   ============================================ */
+
+/* Shared card/box styling - Applied to: .card, .hours-card, columns */
+.card,
+.hours-card,
+.two-column-layout .column,
+.three-column-layout .column,
+.schedule-note {
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Shared heading styles in special sections */
+.two-column-layout h3,
+.three-column-layout h3,
+.goal-card h3 {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Smooth transitions for interactive elements */
+.btn,
+.nav-list a,
+.dropdown-menu a,
+.feature-card,
+.goal-card,
+.classroom-card,
+.back-to-top {
+    transition: all 0.2s ease;
+}
+
+/* ============================================
    HEADER
    ============================================ */
 .site-header {
@@ -311,8 +359,20 @@ h3 {
 .dropdown-menu a {
     display: block;
     padding: var(--spacing-sm);
-    border-radius: 0;
     white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-menu li:first-child a {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.dropdown-menu li:last-child a {
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+.dropdown-menu li:first-child:last-child a {
+    border-radius: var(--border-radius);
 }
 
 .dropdown-menu a:hover,
@@ -466,8 +526,6 @@ section {
 .card {
     background: var(--color-background);
     padding: var(--spacing-lg);
-    border-radius: var(--border-radius);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Goals Grid */
@@ -475,21 +533,10 @@ section {
     text-align: center;
 }
 
-.goal-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-
 .goal-icon {
     font-size: 1.75em;
     margin-left: 0.25em;
     display: inline-block;
-}
-
-.goal-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: var(--spacing-sm);
-    color: var(--color-primary);
 }
 
 .goal-card p {
@@ -990,9 +1037,7 @@ section {
     margin: 0 auto;
     background: var(--color-background);
     padding: var(--spacing-xl);
-    border-radius: var(--border-radius);
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .hours-main {
@@ -1212,11 +1257,48 @@ section {
     text-align: center;
     font-size: 1.75rem;
     color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.embedded-form-wrapper .form-intro {
+    text-align: center;
+    color: var(--color-text-light);
     margin-bottom: var(--spacing-lg);
+    font-size: 0.95rem;
 }
 
 .embedded-form-wrapper iframe {
     border-radius: var(--border-radius);
+}
+
+/* FormSite embedded form overrides */
+.embedded-form-wrapper iframe .submit_button,
+.embedded-form-wrapper iframe #FSsubmit {
+    background: var(--color-primary) !important;
+    color: white !important;
+    border: 2px solid var(--color-primary) !important;
+    border-radius: var(--border-radius) !important;
+    padding: 0.75rem 2rem !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.embedded-form-wrapper iframe .submit_button:hover,
+.embedded-form-wrapper iframe #FSsubmit:hover {
+    background: var(--color-primary-dark) !important;
+    border-color: var(--color-primary-dark) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4) !important;
+}
+
+.embedded-form-wrapper iframe .submit_button:focus,
+.embedded-form-wrapper iframe #FSsubmit:focus {
+    outline: 3px solid var(--color-primary) !important;
+    outline-offset: 2px !important;
+    background: var(--color-primary-dark) !important;
+    border-color: var(--color-primary-dark) !important;
 }
 
 .contact-info {
@@ -1257,20 +1339,6 @@ section {
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-}
-
-.license-section {
-    background: var(--color-background);
-    padding: var(--spacing-lg) 0;
-}
-
-.license-info {
-    text-align: center;
-    color: var(--color-text-light);
-}
-
-.license-info p {
-    margin-bottom: var(--spacing-xs);
 }
 
 /* Classrooms Landing Page */
@@ -1402,14 +1470,12 @@ section {
 
 .two-column-layout .column {
     padding: var(--spacing-lg);
-    background: #f9fafb;
-    border-radius: var(--border-radius);
+    background: #ffffff;
+    border: 1px solid var(--color-border);
 }
 
-.two-column-layout h3 {
-    font-size: 1.25rem;
-    color: var(--color-primary);
-    margin-bottom: var(--spacing-md);
+.two-column-layout .column ul {
+    color: var(--color-text);
 }
 
 .three-column-layout {
@@ -1419,16 +1485,9 @@ section {
     margin-top: var(--spacing-xl);
 }
 
-.three-column-layout h3 {
-    font-size: 1.25rem;
-    color: var(--color-primary);
-    margin-bottom: var(--spacing-md);
-}
-
 .three-column-layout .column {
     padding: var(--spacing-lg);
     background: var(--color-background-alt);
-    border-radius: var(--border-radius);
 }
 
 .feature-list {
@@ -1456,7 +1515,6 @@ section {
     text-align: center;
     padding: var(--spacing-md);
     background: var(--color-background-alt);
-    border-radius: var(--border-radius);
     margin-bottom: var(--spacing-xl);
 }
 
